@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# This is a total suckfest right now, please ignore it
-
 from bs4 import BeautifulSoup
 import requests
 from pprint import pprint
