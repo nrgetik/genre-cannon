@@ -4,12 +4,6 @@ from bs4 import BeautifulSoup
 import requests
 from pprint import pprint
 
-def find_some_child(tag):
-    if tag.string is None:
-        find_some_child(tag.child)
-    else:
-        return tag.child
-
 r = requests.get(u'https://en.wikipedia.org/wiki/List_of_popular_music_genres')
 bowl = BeautifulSoup(r.text)
 cup = bowl.find('div', id='mw-content-text')
