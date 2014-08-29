@@ -4,16 +4,16 @@ from bs4 import BeautifulSoup
 import requests
 from pprint import pprint
 
-r = requests.get(u'https://en.wikipedia.org/wiki/List_of_popular_music_genres')
+r = requests.get('https://en.wikipedia.org/wiki/List_of_popular_music_genres')
 bowl = BeautifulSoup(r.text)
 cup = bowl.find('div', id='mw-content-text')
 
 exclude = [
-    u'Contents',
-    u'Navigation Menu',
-    u'Exclusions',
-    u'References',
-    u'Bibliography'
+    'Contents',
+    'Navigation Menu',
+    'Exclusions',
+    'References',
+    'Bibliography'
 ]
 
 top_level_genres = {}
