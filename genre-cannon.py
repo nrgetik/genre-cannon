@@ -37,23 +37,18 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
         continue
     if span_tag.parent.name == 'h2':
         top_level_genres.setdefault(span_tag.string, {})
-        div_tag = span_tag.parent.next_sibling.next_sibling
-        class_key = div_tag.get('class')
-        if class_key is not None and 'hatnote' in class_key:
-            target_tag = div_tag.next_sibling.next_sibling
-        else:
-            target_tag = div_tag
-        print(target_tag.name)
-        #if not edit section, recurse lists, pass dict
         most_recent_h2 = span_tag.string
+        level = 'primary'
     elif span_tag.parent.name == 'h3':
         top_level_genres.setdefault(most_recent_h2, {}).setdefault(span_tag.string, {})
-        div_tag = span_tag.parent.next_sibling.next_sibling
-        class_key = div_tag.get('class')
-        if class_key is not None and 'hatnote' in class_key:
-            target_tag = div_tag.next_sibling.next_sibling
-        else:
-            target_tag = div_tag
-        print(target_tag.name)
-        # if edit section, do stuff
-        # if not edit section, recurse lists, pass dict
+        level = 'secondary'
+    div_tag = span_tag.parent.next_sibling.next_sibling
+    class_key = div_tag.get('class')
+    if class_key is not None and 'hatnote' in class_key:
+        target_tag = div_tag.next_sibling.next_sibling
+    else:
+        target_tag = div_tag
+    if 'div' in target_tag.name:
+        target_tag = target_tag.find_next('ul')
+    print(target_tag.name)
+
