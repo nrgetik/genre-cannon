@@ -2,7 +2,7 @@
 
 from bs4 import BeautifulSoup
 import requests
-#from pprint import pprint
+from pprint import pprint
 
 def find_dict_depth(node, depth=0):
     if not isinstance(node, dict) or not node:
@@ -18,8 +18,20 @@ def walk_dict(node):
                 print('find  '+key)
                 walk_dict(value)
 
+def dictify_nested_list(ul):
+    result = {}
+    for li in ul.find_all('li', recursive=False):
+        key = next(li.stripped_strings)
+        ul = li.find('ul')
+        if ul:
+            result[key] = dictify_nested_list(ul)
+        else:
+            result[key] = None
+    return result
+
 r = requests.get('https://en.wikipedia.org/wiki/List_of_popular_music_genres')
 bowl = BeautifulSoup(r.text)
+# just a starting point
 cup = bowl.find('div', id='mw-content-text')
 
 exclude = [
@@ -30,18 +42,16 @@ exclude = [
     'Bibliography'
 ]
 
-top_level_genres = {}
+genre_tree = {}
 
 for span_tag in cup.find_all('span', class_='mw-headline'):
     # we don't care about wikipedia article housekeeping
     if any(exclusion in span_tag.string for exclusion in exclude):
         continue
     if span_tag.parent.name == 'h2':
-        top_level_genres.setdefault(span_tag.string, {})
         most_recent_h2 = span_tag.string
         level = 'primary'
     elif span_tag.parent.name == 'h3':
-        top_level_genres.setdefault(most_recent_h2, {}).setdefault(span_tag.string, {})
         level = 'secondary'
     # if the section has multiple columns, this will be one of two possible div tags,
     # otherwise it's the ul that we're actually looking for
@@ -54,4 +64,10 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
         target_tag = maybe_div_tag
     if 'div' in target_tag.name:
         target_tag = target_tag.find_next('ul')
-    print(target_tag.name)
+    # build our tree
+    if level == 'primary':
+        genre_tree.setdefault(span_tag.string, dictify_nested_list(target_tag))
+    elif level == 'secondary':
+        genre_tree.setdefault(most_recent_h2).setdefault(span_tag.string, dictify_nested_list(target_tag))
+
+pprint(genre_tree, width=1)
