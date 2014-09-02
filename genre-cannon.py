@@ -6,13 +6,13 @@ from pprint import pprint
 import sys
 import yaml
 
-def dictify_nested_list(ul):
+def dictify_nested_ul(ul):
     result = {}
     for li in ul.find_all('li', recursive=False):
         key = next(li.stripped_strings)
         ul = li.find('ul')
         if ul:
-            result[key] = dictify_nested_list(ul)
+            result[key] = dictify_nested_ul(ul)
         else:
             result[key] = None
     return result
@@ -54,9 +54,9 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
         target_tag = target_tag.find_next('ul')
     # build our tree
     if level == 'primary':
-        genre_tree.setdefault(span_tag.string, dictify_nested_list(target_tag))
+        genre_tree.setdefault(span_tag.string, dictify_nested_ul(target_tag))
     elif level == 'secondary':
-        genre_tree.setdefault(most_recent_h2).setdefault(span_tag.string, dictify_nested_list(target_tag))
+        genre_tree.setdefault(most_recent_h2).setdefault(span_tag.string, dictify_nested_ul(target_tag))
 
 pprint(genre_tree, width=1)
 
@@ -64,7 +64,7 @@ print(sys.getrecursionlimit())
 
 # let's poop out some yaml
 with open('genres-tree.yaml', 'w') as yaml_outfile:
-    yaml_outfile.write(yaml.dump(genre_tree, default_flow_style=True))
+    yaml_outfile.write(yaml.dump(genre_tree, default_flow_style=False))
 
 # and a flattened version, just-in-case
 
