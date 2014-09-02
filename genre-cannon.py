@@ -70,5 +70,3 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
 clear_yaml = open('genres-tree.yaml', 'w')
 clear_yaml.close()
 produce_yaml_from_dict(genre_tree)
-
-# and a flattened version, just-in-case
