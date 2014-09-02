@@ -1,3 +1,3 @@
 genre-cannon
 ============
-Is going to be killer
+Is killer
