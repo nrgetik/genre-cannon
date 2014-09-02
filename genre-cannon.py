@@ -3,6 +3,8 @@
 from bs4 import BeautifulSoup
 import requests
 from pprint import pprint
+import sys
+import yaml
 
 def dictify_nested_list(ul):
     result = {}
@@ -57,3 +59,12 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
         genre_tree.setdefault(most_recent_h2).setdefault(span_tag.string, dictify_nested_list(target_tag))
 
 pprint(genre_tree, width=1)
+
+print(sys.getrecursionlimit())
+
+# let's poop out some yaml
+with open('genres-tree.yaml', 'w') as yaml_outfile:
+    yaml_outfile.write(yaml.dump(genre_tree, default_flow_style=True))
+
+# and a flattened version, just-in-case
+
