@@ -2,9 +2,6 @@
 
 from bs4 import BeautifulSoup
 import requests
-from pprint import pprint
-import sys
-import yaml
 
 def dictify_nested_ul(ul):
     result = {}
@@ -16,6 +13,17 @@ def dictify_nested_ul(ul):
         else:
             result[key] = None
     return result
+
+def produce_yaml_from_dict(node, spacer='- '):
+    for key, value in node.items():
+        local_f = open('genres-tree.yaml', 'a')
+        if isinstance(value, dict):
+            local_f.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
+            local_f.close()
+            produce_yaml_from_dict(value,'    '+spacer)
+        else:
+            local_f.write('%s%s\n' % (spacer, key.encode('utf8').lower()))
+            local_f.close()
 
 r = requests.get('https://en.wikipedia.org/wiki/List_of_popular_music_genres')
 bowl = BeautifulSoup(r.text)
@@ -58,13 +66,9 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
     elif level == 'secondary':
         genre_tree.setdefault(most_recent_h2).setdefault(span_tag.string, dictify_nested_ul(target_tag))
 
-pprint(genre_tree, width=1)
-
-print(sys.getrecursionlimit())
-
 # let's poop out some yaml
-with open('genres-tree.yaml', 'w') as yaml_outfile:
-    yaml_outfile.write(yaml.dump(genre_tree, default_flow_style=False))
+clear_yaml = open('genres-tree.yaml', 'w')
+clear_yaml.close()
+produce_yaml_from_dict(genre_tree)
 
 # and a flattened version, just-in-case
-
