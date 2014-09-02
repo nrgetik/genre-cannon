@@ -4,20 +4,6 @@ from bs4 import BeautifulSoup
 import requests
 from pprint import pprint
 
-def find_dict_depth(node, depth=0):
-    if not isinstance(node, dict) or not node:
-        return depth
-    return max(find_dict_depth(value, depth+1) for key, value in node.iteritems())
-
-def walk_dict(node):
-    for key, value in node.items():
-        if isinstance(value, dict):
-            if not value:
-                print('find '+key)
-            else:
-                print('find  '+key)
-                walk_dict(value)
-
 def dictify_nested_list(ul):
     result = {}
     for li in ul.find_all('li', recursive=False):
@@ -57,7 +43,7 @@ for span_tag in cup.find_all('span', class_='mw-headline'):
     # otherwise it's the ul that we're actually looking for
     maybe_div_tag = span_tag.parent.next_sibling.next_sibling
     maybe_div_class_key = maybe_div_tag.get('class')
-    # check on that and do necessary cleanup-
+    # check on that and do necessary posturing-
     if maybe_div_class_key is not None and 'hatnote' in maybe_div_class_key:
         target_tag = maybe_div_tag.next_sibling.next_sibling
     else:
