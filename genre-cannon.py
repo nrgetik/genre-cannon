@@ -16,13 +16,13 @@ def dictify_nested_ul(ul):
     return result
 
 
-def produce_yaml_from_dict(node, local_f, spacer='- '):
+def produce_yaml_from_dict(node, local_fh, spacer='- '):
     for key, value in sorted(node.items()):
         if isinstance(value, dict):
-            local_f.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
-            produce_yaml_from_dict(value, local_f, '    ' + spacer)
+            local_fh.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
+            produce_yaml_from_dict(value, local_fh, '    ' + spacer)
         else:
-            local_f.write('%s%s\n' % (spacer, key.encode('utf8').lower()))
+            local_fh.write('%s%s\n' % (spacer, key.encode('utf8').lower()))
 
 
 def get_wikipedia_data():
