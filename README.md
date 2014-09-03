@@ -4,4 +4,4 @@ Plunders https://en.wikipedia.org/wiki/List_of_popular_music_genres for its swee
 
 requires
 --------
-[beautifulsoup4]http://www.crummy.com/software/BeautifulSoup/
+[beautifulsoup4](http://www.crummy.com/software/BeautifulSoup/)
