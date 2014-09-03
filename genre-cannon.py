@@ -20,7 +20,7 @@ def produce_yaml_from_dict(node, spacer='- '):
         if isinstance(value, dict):
             local_f.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
             local_f.close()
-            produce_yaml_from_dict(value,'    '+spacer)
+            produce_yaml_from_dict(value, '    '+spacer)
         else:
             local_f.write('%s%s\n' % (spacer, key.encode('utf8').lower()))
             local_f.close()
