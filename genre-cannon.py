@@ -15,7 +15,7 @@ def dictify_nested_ul(ul):
     return result
 
 def produce_yaml_from_dict(node, spacer='- '):
-    for key, value in node.items():
+    for key, value in sorted(node.items()):
         local_f = open('genres-tree.yaml', 'a')
         if isinstance(value, dict):
             local_f.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
