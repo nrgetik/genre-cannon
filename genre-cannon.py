@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 import requests
 
+
 def dictify_nested_ul(ul):
     result = {}
     for li in ul.find_all('li', recursive=False):
@@ -14,16 +15,19 @@ def dictify_nested_ul(ul):
             result[key] = None
     return result
 
+
 def produce_yaml_from_dict(node, local_f, spacer='- '):
     for key, value in sorted(node.items()):
         if isinstance(value, dict):
             local_f.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
-            produce_yaml_from_dict(value, local_f, '    '+spacer)
+            produce_yaml_from_dict(value, local_f, '    ' + spacer)
         else:
             local_f.write('%s%s\n' % (spacer, key.encode('utf8').lower()))
 
+
 def get_wikipedia_data():
-    r = requests.get('https://en.wikipedia.org/wiki/List_of_popular_music_genres')
+    r = requests.get(
+        'https://en.wikipedia.org/wiki/List_of_popular_music_genres')
     bowl = BeautifulSoup(r.text)
     # just a starting point
     cup = bowl.find('div', id='mw-content-text')
@@ -60,16 +64,20 @@ def get_wikipedia_data():
             target_tag = target_tag.find_next('ul')
         # build our tree
         if level == 'primary':
-            genre_tree.setdefault(span_tag.string, dictify_nested_ul(target_tag))
+            genre_tree.setdefault(
+                span_tag.string,
+                dictify_nested_ul(target_tag))
         elif level == 'secondary':
-            genre_tree.setdefault(most_recent_h2).setdefault(span_tag.string, dictify_nested_ul(target_tag))
+            genre_tree.setdefault(most_recent_h2).setdefault(
+                span_tag.string,
+                dictify_nested_ul(target_tag))
 
     return genre_tree
 
 
 if __name__ == '__main__':
     genre_tree = get_wikipedia_data()
-    
+
     # let's poop out some yaml
     with open('genres-tree.yaml', 'w') as fh:
         produce_yaml_from_dict(genre_tree, fh)
