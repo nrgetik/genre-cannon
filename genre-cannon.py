@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from bs4 import BeautifulSoup
+import string
 import requests
 
 
@@ -75,9 +76,27 @@ def get_wikipedia_data():
     return genre_tree
 
 
+def check_genres_occ(fh):
+    """Print a warning if genres appear multiple times in the output"""
+
+    yaml = fh.readlines()
+    done_genres = set()
+    dup_genres = set()
+    for line in yaml:
+        genre = string.strip(string.strip(line), ":-")
+        if genre not in done_genres:
+            done_genres.add(genre)
+        else:
+            dup_genres.add(genre)
+    if dup_genres:
+        print "Warning: duplicated genres %s" % sorted(list(dup_genres))
+
+
 if __name__ == '__main__':
     genre_tree = get_wikipedia_data()
 
     # let's poop out some yaml
-    with open('genres-tree.yaml', 'w') as fh:
+    with open('genres-tree.yaml', 'r+') as fh:
         produce_yaml_from_dict(genre_tree, fh)
+        fh.seek(0)
+        check_genres_occ(fh)
