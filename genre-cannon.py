@@ -96,7 +96,7 @@ if __name__ == '__main__':
     genre_tree = get_wikipedia_data()
 
     # let's poop out some yaml
-    with open('genres-tree.yaml', 'r+') as fh:
+    with open('genres-tree.yaml', 'w+') as fh:
         produce_yaml_from_dict(genre_tree, fh)
         fh.seek(0)
         check_genres_occ(fh)
