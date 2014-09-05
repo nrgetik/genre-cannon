@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
 import string
@@ -17,13 +18,53 @@ def dictify_nested_ul(ul):
     return result
 
 
-def produce_yaml_from_dict(node, local_fh, spacer='- '):
+def count_genres_occ(node, occs):
+    """Keep a count of number of children for each node.
+    """
     for key, value in sorted(node.items()):
+        key = key.encode('utf8').lower()
         if isinstance(value, dict):
-            local_fh.write('%s%s:\n' % (spacer, key.encode('utf8').lower()))
-            produce_yaml_from_dict(value, local_fh, '    ' + spacer)
+            if key in occs.keys():
+                occs[key].append(len(value.items()))
+            else:
+                occs[key] = [len(value.items())]
+            count_genres_occ(value, occs)
         else:
-            local_fh.write('%s%s\n' % (spacer, key.encode('utf8').lower()))
+            if key in occs.keys():
+                occs[key].append(1)
+            else:
+                occs[key] = [1]
+
+def is_best_occ(genre, occs):
+    """When genre present multiple time, keep the location with most children
+    """   
+    try:
+        num_childs = occs[genre].pop(0)
+    except IndexError as e:
+        print 'Skipping %s' % genre
+        return False # better occurence has already been written
+
+    if occs[genre] and num_childs < max(occs[genre]):
+        # there are others occurences with more childs, skip this one
+        print 'Skipping %s' % genre
+        return False
+
+    occs[genre] = []
+    return True
+
+
+def produce_yaml_from_dict(node, local_fh, occs, spacer='- '):
+    """Write yaml from dict by excluding some keys to avoid duplicate genres.
+    """
+    for key, value in sorted(node.items()):
+        key = key.encode('utf8').lower()
+        if isinstance(value, dict):
+            if is_best_occ(key, occs):
+                local_fh.write('%s%s:\n' % (spacer, key))
+            produce_yaml_from_dict(value, local_fh, occs, '    ' + spacer)
+        else:
+            if is_best_occ(key, occs):
+                local_fh.write('%s%s\n' % (spacer, key))
 
 
 def get_wikipedia_data():
@@ -97,6 +138,8 @@ if __name__ == '__main__':
 
     # let's poop out some yaml
     with open('genres-tree.yaml', 'w+') as fh:
-        produce_yaml_from_dict(genre_tree, fh)
+        occs = {}
+        count_genres_occ(genre_tree, occs)
+        produce_yaml_from_dict(genre_tree, fh, occs)
         fh.seek(0)
         check_genres_occ(fh)
