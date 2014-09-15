@@ -1,4 +1,6 @@
 - african:
+    - african heavy metal
+    - african hip hop
     - afrobeat
     - apala
     - benga
@@ -14,6 +16,7 @@
     - isicathamiya
     - jit
     - jùjú
+    - kadongo kamu
     - kapuka
     - kizomba
     - kuduro
@@ -46,7 +49,6 @@
         - j-pop
         - k-pop
         - kayōkyoku
-        - korean pop
         - mandopop
         - onkyokei
         - taiwanese pop
@@ -58,7 +60,7 @@
     - south and southeast asian:
         - baila
         - bhangra
-        - bhojpuri
+        - bhojpuri pop
         - dangdut
         - filmi
         - indian pop
@@ -72,11 +74,9 @@
         - ragini
         - thai pop
 - avant-garde:
-    - electroacoustic
     - experimental music
     - lo-fi
     - musique concrète
-    - noise
 - blues:
     - african blues
     - blues rock
@@ -101,7 +101,6 @@
     - piano blues
     - piedmont blues
     - punk blues
-    - rhythm and blues
     - soul blues
     - st. louis blues
     - swamp blues
@@ -179,12 +178,9 @@
     - country pop
     - country rap
     - country rock
-    - country soul
-    - cowboy/western music
     - dansband music
     - franco-country
     - gulf and western
-    - hellbilly music
     - hokum
     - honky tonk
     - instrumental country
@@ -193,9 +189,10 @@
     - neotraditional country
     - outlaw country
     - progressive country
-    - psychobilly/punkabilly
     - red dirt
-    - rockabilly
+    - rockabilly:
+        - hellbilly music
+        - psychobilly/punkabilly
     - sertanejo
     - texas country
     - traditional country music
@@ -239,7 +236,6 @@
     - disco:
         - cosmic disco
         - disco polo
-        - europop:
             - euro disco
         - italo disco
         - nu-disco
@@ -252,7 +248,6 @@
         - dubtronica
         - ethnic electronica
         - moombahton
-        - new-age music
         - nu jazz
         - trip hop
     - drum and bass:
@@ -283,7 +278,6 @@
         - field recording
         - live coding
         - live electronics
-        - musique concrète
         - soundscape composition
         - tape music
     - electronic rock:
@@ -323,7 +317,6 @@
         - bouncy house
         - bouncy techno
         - breakcore
-        - darkcore
         - digital hardcore
         - doomcore
         - dubstyle
@@ -434,6 +427,7 @@
     - british folk revival
     - celtic music
     - contemporary folk
+    - cowboy/western music
     - filk music
     - freak folk
     - indie folk
@@ -446,47 +440,34 @@
 - hip hop:
     - alternative hip hop
     - avant-garde hip hop
-    - bongo flava
     - chap hop
-    - chopped and screwed
     - christian hip hop
     - conscious hip hop
     - country-rap
     - crunkcore
     - cumbia rap
     - east coast hip hop:
-        - baltimore club
         - brick city club
         - hardcore hip hop
         - mafioso rap
         - new jersey hip hop
     - electro music
-    - freestyle music
     - freestyle rap
     - g-funk
     - gangsta rap
-    - ghetto house
-    - ghettotech
     - golden age hip hop
-    - grime
-    - hardcore hip hop
     - hip hop soul
-    - hip house
     - hip pop
-    - hiplife
     - hyphy
     - industrial hip hop
     - instrumental hip hop
     - jazz rap
-    - kwaito
     - low bap
     - lyrical hip hop
     - merenrap
     - midwest hip hop:
         - chicago hip hop:
-            - ghetto house
         - detroit hip hop:
-            - ghettotech
         - horrorcore
         - st. louis hip hop
         - twin cities hip hop
@@ -502,36 +483,26 @@
         - rap metal
         - rapcore
     - reggae español/spanish reggae
-    - reggaeton
     - songo-salsa
     - southern hip hop:
         - atlanta hip hop:
             - snap music
         - bounce music
-        - crunk
         - houston hip hop:
             - chopped and screwed
         - miami bass
-    - trap
-    - trip hop
     - turntablism
     - underground hip hop
     - urban pasifika
     - west coast hip hop:
         - chicano rap
-        - g-funk
-        - gangsta rap
-        - hyphy
         - jerkin'
 - jazz:
-    - acid jazz
     - asian american jazz
     - avant-garde jazz
     - bebop
     - boogie-woogie
-    - bossa nova
     - british dance band
-    - cape jazz
     - chamber jazz
     - continental jazz
     - cool jazz
@@ -545,12 +516,9 @@
     - free jazz
     - gypsy jazz
     - hard bop
-    - jazz blues
     - jazz fusion
-    - jazz rap
     - jazz rock
     - jazz-funk
-    - kansas city blues
     - kansas city jazz
     - latin jazz
     - livetronica
@@ -560,7 +528,6 @@
     - neo-bop jazz
     - neo-swing
     - novelty ragtime
-    - nu jazz
     - orchestral jazz
     - post-bop
     - punk jazz
@@ -587,17 +554,10 @@
     - chanson
     - christian pop
     - classical crossover
-    - country pop
-    - dance-pop
-    - disco polo
-    - electropop
     - europop:
         - austropop
         - balkan pop
-        - eurobeat
         - french pop
-        - italo dance
-        - italo disco
         - latin pop
         - laïkó
         - nederpop
@@ -619,28 +579,21 @@
     - space age pop
     - sunshine pop
     - surf pop
-    - synthpop
-    - technopop
     - teen pop
     - traditional pop music
     - turkish pop
     - vispop
     - wonky pop
 - rhythm and blues:
-    - contemporary r&b
     - funk:
         - deep funk
-        - disco:
-            - boogie
-            - post-disco
         - go-go
         - p-funk
-    - new jack swing
     - soul:
         - blue-eyed soul
-        - hip hop soul
         - neo soul
         - northern soul
+        - southern soul
 - rock:
     - alternative rock:
         - britpop:
@@ -652,7 +605,6 @@
             - dunedin sound
             - twee pop
         - indie rock
-        - industrial rock
         - noise pop
         - nu metal
         - post-punk revival
@@ -667,8 +619,6 @@
     - christian rock
     - dark cabaret
     - desert rock
-    - electronic rock
-    - electronicore
     - experimental rock
     - folk rock
     - garage rock
@@ -676,7 +626,6 @@
     - hard rock
     - heavy metal:
         - alternative metal:
-            - nu metal
         - black metal:
             - viking metal
         - christian metal
@@ -692,14 +641,12 @@
         - funk metal
         - glam metal
         - gothic metal
-        - industrial metal
         - metalcore:
             - deathcore
-            - mathcore:
-                - djent
+            - mathcore
         - power metal
-        - progressive metal
-        - rap metal
+        - progressive metal:
+            - djent
         - sludge metal
         - speed metal
         - stoner rock
@@ -707,7 +654,6 @@
         - thrash metal:
             - crossover thrash
             - groove metal
-    - jazz rock
     - math rock
     - new wave:
         - world fusion
@@ -723,7 +669,6 @@
         - krautrock
         - new prog
         - rock in opposition
-        - space rock
     - psychedelic rock:
         - acid rock
         - freakbeat
@@ -736,17 +681,14 @@
         - art punk
         - christian punk
         - deathrock
-        - digital hardcore
         - folk punk:
             - celtic punk
-            - cowpunk
             - gypsy punk
         - garage punk
         - grindcore:
             - crustgrind
             - noisegrind
         - hardcore punk:
-            - crossover thrash
             - post-hardcore:
                 - emo:
                     - screamo
@@ -760,8 +702,6 @@
         - ska punk:
             - ska-core
         - skate punk
-    - rap rock:
-        - rapcore
     - rock and roll
     - southern rock
     - sufi rock
@@ -773,9 +713,7 @@
     - dancehall
     - dub
     - lovers rock
-    - ragga
     - ragga jungle
-    - reggae:
         - polish reggae
     - reggae fusion
     - rocksteady
